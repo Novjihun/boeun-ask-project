@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    
+</head>
+<body style="background-color: #D8D8D8;">
+    <!--웹사이트 상단 바-->
+	<header>
+        <div class="top-logo">
+          <a href="main.html">
+            <img src="image/logo.png" class="logo">
+          </a>
+        </div>
+        <nav class="top-nav">
+        <ul class="ul">
+            <li class="ask"><a href="leader-board.html">건의하기</a></li>
+            <li class="introduce" ><a href="">담당 부서 및 교사 소개</a></li>
+            <li class="login" ><a href="login.html">로그인</a></li>
+            <li class="sigh up" ><a href="">회원가입</a></li>
+        </ul>
+            
+        </nav>
+        
+    </header>
+    <!--웹사이트 상단 바-->
+    
+    <div class="login-container">
+        <h2>로그인</h2>
+        <form action="/login" method="POST">
+            <div class="input-group">
+                <label for="username">아이디</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">로그인</button>
+        </form>
+    </div>
+</body>
+</html>
