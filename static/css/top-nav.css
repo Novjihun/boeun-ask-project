@@ -33,6 +33,16 @@
       margin: 0;
       z-index: 1;
     }
+    .top-nav-login{
+      position: relative;
+      background-color: white;
+      display: block;
+      width: 99vw;
+      float: left;
+      height: 75px;
+      margin: 0;
+      z-index: 1;
+    }
     .top-nav ul li{
       list-style-type: none;
       margin: 0 auto;
@@ -50,8 +60,29 @@
       font-size: 20px;
       font-weight: 500;
     }
+    .top-nav-login ul li{
+      list-style-type: none;
+      margin: 0 auto;
+      padding-left: 7px;
+      padding-right: 5px;
+      float: left;
+      width: 23%;
+      height: 50px;
+      line-height: 50px;
+      vertical-align: middle;
+      text-align: right;
+      object-fit: cover;
+      text-decoration-line: none;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 500;
+    }
 }
 .top-nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+.top-nav-login ul li a {
   text-decoration: none;
   color: black;
 }

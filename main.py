@@ -40,11 +40,11 @@ def login():
 
 @app.route('/leader_board')
 def leader_board():
-    return render_template('leader_board.html')
+    return render_template('leader_board.html', login=session.get('logged_in'), username=session.get('username'))
 
 @app.route('/information')
 def information():
-    return render_template('information.html')
+    return render_template('information.html', login=session.get('logged_in'), username=session.get('username'))
 
 @app.route('/logout')
 def logout():

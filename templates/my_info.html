@@ -16,12 +16,16 @@
                 <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
             </a>
         </div>
-        <nav class="top-nav">
+        <nav class="top-nav{%if login%}-login{%endif%}">
             <ul class="ul">
                 <li class="ask"><a href="/leader_board">건의하기</a></li>
                 <li class="introduce"><a href="/information">담당 부서 및 교사 소개</a></li>
+                {% if login %}
                 <li class="my_info"><a href="/my_info">내 정보 ({{ username }})</a></li>
                 <li class="logout"><a href="/logout">로그아웃</a></li>
+                {% else %}
+                <li class="login"><a href="/login">로그인</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
