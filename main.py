@@ -2,10 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import os
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # Flash 메시지 사용을 위한 시크릿 키 설정
+app.secret_key = 'supersecretkey'  # Secret key for session and flash messages
 
 def check_credentials(username, password):
-    # 로그인 정보를 저장한 텍스트 파일 경로
+    # File path where user credentials are stored
     file_path = os.path.join(os.path.dirname(__file__), 'user-account.txt')
     
     try:
@@ -25,9 +25,17 @@ def sign_in():
     if check_credentials(username, password):
         session['logged_in'] = True
         session['username'] = username
-        return redirect(url_for('main'))  # 로그인 성공 시 메인 페이지로 리다이렉트
+        return redirect(url_for('main'))  # Redirect to main page after successful login
     else:
-        flash("로그인 정보가 일치하지 않습니다. 다시 시도해주세요.")
+        flash("로그인 정보가 일치하지 않습니다. 다시 시도해주세요.")  # Flash message for incorrect login
+        return redirect(url_for('login'))
+
+@app.route('/write')
+def write():
+    if session.get('logged_in'):
+        a = 1  # Placeholder for functionality when logged in
+        return "You are logged in. Write functionality goes here."
+    else:
         return redirect(url_for('login'))
 
 @app.route('/')
@@ -40,7 +48,7 @@ def login():
 
 @app.route('/leader_board')
 def leader_board():
-    return render_template('leader_board.html', login=session.get('logged_in'), username=session.get('username'))
+    return render_template('leader-board.html', login=session.get('logged_in'), username=session.get('username'))
 
 @app.route('/information')
 def information():
@@ -50,12 +58,12 @@ def information():
 def logout():
     session.pop('logged_in', None)
     session.pop('username', None)
-    return redirect(url_for('main'))
+    return redirect(url_for('main'))  # Redirect to main page after logout
 
 @app.route('/my_info')
 def my_info():
     if not session.get('logged_in'):
-        return redirect(url_for('login'))
+        return redirect(url_for('login'))  # Redirect to login if not logged in
     return render_template('my_info.html', username=session.get('username'))
 
 if __name__ == '__main__':
