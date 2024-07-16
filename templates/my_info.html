@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/top-nav.css') }}">
-    <title>Main Page</title>
+    <link rel="stylesheet" href="../static/css/my_info">
+    <link rel="stylesheet" href="../static/css/top-nav">
+    <title>My Info</title>
 </head>
 <body style="background-color: #D8D8D8;">
     <!--웹사이트 상단 바-->
@@ -20,24 +20,16 @@
             <ul class="ul">
                 <li class="ask"><a href="/leader_board">건의하기</a></li>
                 <li class="introduce"><a href="/information">담당 부서 및 교사 소개</a></li>
-                {% if login %}
                 <li class="my_info"><a href="/my_info">내 정보 ({{ username }})</a></li>
                 <li class="logout"><a href="/logout">로그아웃</a></li>
-                {% else %}
-                <li class="login"><a href="/login">로그인</a></li>
-                {% endif %}
             </ul>
         </nav>
     </header>
     <!--웹사이트 상단 바-->
-    <div class="middle-box">
-        <a>HELLO</a>
-    </div>
-    <div class="left-bottom-box">
-        <a>Hello1</a>
-    </div>
-    <div class="right-bottom-box">
-        <a>Hello2</a>
+    <div class="info-box">
+        <h2>내 정보</h2>
+        <p>아이디: {{ username }}</p>
+        <!-- 여기에 추가적인 사용자 정보를 표시할 수 있습니다 -->
     </div>
 </body>
 </html>
