@@ -10,9 +10,13 @@ def main():
 def login():
     return render_template('login.html')
 
-@app.route('/leader-board')
+@app.route('/leader_board')
 def leader_board():
-    return render_template('leaderboard.html')
+    return render_template('leader_board.html')
+
+@app.route('/information')
+def information():
+    return render_template('information.html')
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)
