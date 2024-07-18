@@ -18,6 +18,10 @@ def check_credentials(username, password):
     except FileNotFoundError:
         return False
 
+@app.route('/article_post', methods = ['POST'])
+def article_post():
+    return '언젠간 내가 만들거야 - 송지훈'
+
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
     username = request.form.get("username")
@@ -30,13 +34,19 @@ def sign_in():
         flash("로그인 정보가 일치하지 않습니다. 다시 시도해주세요.")  # Flash message for incorrect login
         return redirect(url_for('login'))
 
-@app.route('/write')
+@app.route('/write', methods=['GET', 'POST'])
 def write():
-    if session.get('logged_in'):
-        a = 1  # Placeholder for functionality when logged in
-        return "You are logged in. Write functionality goes here."
-    else:
-        return redirect(url_for('login'))
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+    
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        # 여기서 글쓰기 데이터 처리 로직을 추가할 수 있습니다.
+        flash(f"글쓰기 완료: 제목 - {title}, 내용 - {content}")
+        return redirect(url_for('main'))  # Redirect to main page after writing
+    
+    return render_template('write-page.html')
 
 @app.route('/')
 def main():

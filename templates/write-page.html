@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/write-page.css">
+    <link rel="stylesheet" href="../static/css/top-nav.css">
+</head>
+<body style="background-color: #D8D8D8;">
+<!--웹사이트 상단 바-->
+<header>
+    <div class="top-logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+        </a>
+    </div>
+    <nav class="top-nav{%if login%}-login{%endif%}">
+        <ul class="ul">
+            <li class="ask"><a href="/leader_board">건의하기</a></li>
+            <li class="introduce"><a href="/information">담당 부서 및 교사 소개</a></li>
+            {% if login %}
+            <li class="my_info"><a href="/my_info">내 정보 ({{ username }})</a></li>
+            <li class="logout"><a href="/logout">로그아웃</a></li>
+            {% else %}
+            <li class="login"><a href="/login">로그인</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<!--웹사이트 상단 바-->
+<body>
+    <div class="container">
+        <h2>글쓰기</h2>
+        <form action="/article_post" method="POST">
+            <div class="form-group">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">글 올리기</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+
