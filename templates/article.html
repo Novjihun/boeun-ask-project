@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/write-page.css">
+    <link rel="stylesheet" href="../static/css/article.css">
     <link rel="stylesheet" href="../static/css/top-nav.css">
 </head>
 <body style="background-color: #D8D8D8;">
@@ -29,21 +29,40 @@
     </nav>
 </header>
 <!--웹사이트 상단 바-->
-    <div class="container">
-        <h2>글쓰기</h2>
-        <form action="/article_post" method="POST" enctype="multipart/form-data">
+<div class="container">
+    <h2>{{ post.title }}</h2>
+    <p><strong>작성자:</strong> {{ post.username }}</p>
+    <p><strong>작성날짜:</strong> {{ post.date.strftime('%Y-%m-%d') }}</p>
+    <p>{{ post.content }}</p>
+
+    <!-- 댓글 입력 폼 (글 작성자 또는 관리자일 때만 표시) -->
+    {% if login and (session.username == post.username or session.role == 'admin') %}
+        <h3>댓글</h3>
+        <form action="/post_comment/{{ post.filename }}" method="POST">
             <div class="form-group">
-                <label for="title">제목:</label>
-                <input type="text" id="title" name="title" required>
+                <label for="comment">댓글 내용:</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea>
             </div>
             <div class="form-group">
-                <label for="content">내용:</label>
-                <textarea id="content" name="content" required></textarea>
-            </div>
-            <!--사진 첨부 시간부족-->
-                <button type="submit">글 올리기</button>
+                <button type="submit">댓글 올리기</button>
             </div>
         </form>
+    {% else %}
+        <p>댓글을 작성할 수 있는 권한이 없습니다.</p>
+    {% endif %}
+
+    <!-- 댓글 목록 -->
+    <h3>댓글 목록</h3>
+    <div id="comments">
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.username }}</strong> - {{ comment.date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% else %}
+            <p>댓글이 없습니다.</p>
+        {% endfor %}
     </div>
+</div>
 </body>
 </html>

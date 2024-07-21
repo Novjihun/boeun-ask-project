@@ -29,23 +29,34 @@
     </nav>
 </header>
 <!--웹사이트 상단 바-->
-        <table class="table">
-            <tr><td colspan="2"><h2>게시판</h2></td></tr>
-            <tr class="header">
-                <td class="num">번호</td>
-                <td class="title">제목</td>
-                <td>작성자</td>
-                <td>작성날짜</td>
-            </tr>
-        </table>
-        <br>
-        <table>
-            <tr>
-                <td><button onclick="location.href='/write'">글쓰기</button></td>
-            </tr>
-        </table>
-        <div class="box">
-
-        </div>
+<div class="container">
+    <table class="table">
+        <tr><td colspan="4"><h2>게시판</h2></td></tr>
+        <tr class="header">
+            <td class="num">번호</td>
+            <td class="title">제목</td>
+            <td>작성자</td>
+            <td>작성날짜</td>
+        </tr>
+        {% for post in posts %}
+        <tr class="body">
+            <td class="num">{{ loop.index }}</td>
+            <td class="title">
+                <a class="link" href="{{ url_for('view_article', filename=post.username + '_' + post.date.strftime('%Y-%m-%d-%H-%M-%S') + '.txt') }}">
+                    {{ post.title }}
+                </a>                
+            </td>
+            <td>{{ post.username }}</td>
+            <td>{{ post.date.strftime('%Y-%m-%d') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td><button onclick="location.href='/write'">글쓰기</button></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
